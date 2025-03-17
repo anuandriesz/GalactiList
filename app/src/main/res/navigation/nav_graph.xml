@@ -1,0 +1,27 @@
+<!-- nav_graph.xml -->
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/planetListFragment">
+
+    <fragment
+        android:id="@+id/planetListFragment"
+        android:name="com.example.galactilist.ui.planetList.PlanetList"
+        android:label="Planet List"
+        tools:layout="@layout/fragment_planet_list" >
+        <action
+            android:id="@+id/action_planetListFragment_to_planetDetailFragment"
+            app:destination="@id/planetDetailFragment"
+            app:launchSingleTop="false" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/planetDetailFragment"
+        android:name="com.example.galactilist.ui.planetDetailView.PlanetDetailViewFragment"
+        android:label="Planet Detail"
+        tools:layout="@layout/fragment_planet_detail_view" />
+        <argument
+            android:name="planet"
+            app:argType="com.example.galactilist.model.Planet" />
+</navigation>

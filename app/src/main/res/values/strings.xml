@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">GalactiList</string>
+    <string name="planet_name">Planet Name</string>
+    <string name="orbital_period">Orbital Period</string>
+    <string name="gravity">Gravity</string>
+    <string name="banner_image_description">Banner image of the planet</string>
+</resources>

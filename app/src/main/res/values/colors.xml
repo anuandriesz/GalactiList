@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="glgalactiPrimary">#9749FF</color>
+    <color name="galactiPrimary_t80">#CC9749FF</color>
+    <color name="galactiPrimary_t60">#999749FF</color>
+    <color name="galactiPrimary_t40">#669749FF</color>
+    <color name="galactiPrimary_t20">#339749FF</color>
+
+    <color name="galactiSeconday_01">#00FF9C</color>
+    <color name="galactiSeconday_01_t80">#CC00FF9C</color>
+    <color name="galactiSeconday_01_t60">#9900FF9C</color>
+    <color name="galactiSeconday_01_t40">#6600FF9C</color>
+    <color name="galactiSeconday_01_t20">#3300FF9C</color>
+
+    <color name="galactiSeconday_02">#4C2D85</color>
+    <color name="galactiSeconday_02_t80">#CC4C2D85</color>
+    <color name="galactiSeconday_02_t60">#994C2D85</color>
+    <color name="galactiSeconday_02_t40">#664C2D85</color>
+    <color name="galactiSeconday_02_t20">#334C2D85</color>
+
+    <color name="galactiSeconday_03">#FEFE34</color>
+    <color name="galactiSeconday_03_t80">#CCFEFE34</color>
+    <color name="galactiSeconday_03_t60">#99FEFE34</color>
+    <color name="galactiSeconday_03_t40">#66FEFE34</color>
+    <color name="galactiSeconday_03_t20">#33FEFE34</color>
+
+    <color name="galactiSeconday_04">#F707F7</color>
+    <color name="galactiSeconday_04Dark">#C000C3</color>
+    <color name="galactiSeconday_04Light">#FF62FF</color>
+    <color name="galactiSeconday_04_t80">#CCF707F7</color>
+    <color name="galactiSeconday_04_t60">#99F707F7</color>
+    <color name="galactiSeconday_04_t40">#66F707F7</color>
+    <color name="galactiSeconday_04_t20">#33F707F7</color>
+
+    <color name="galactiSeconday_05">#EADE06</color>
+    <color name="galactiSeconday_05_t80">#CCEADE06</color>
+    <color name="galactiSeconday_05_t60">#99EADE06</color>
+    <color name="galactiSeconday_05_t40">#66EADE06</color>
+    <color name="galactiSeconday_05_t20">#33EADE06</color>
+
+    <color name="galactiSeconday_07">#04AA66</color>
+    <color name="galactiSeconday_07_t80">#CC04AA66</color>
+    <color name="galactiSeconday_07_t60">#9904AA66</color>
+    <color name="galactiSeconday_07_t40">#6604AA66</color>
+    <color name="galactiSeconday_07_t20">#3304AA66</color>
+    <color name="white">#FFFFFF</color>
+    <color name="black">#000000</color>
+    <color name="transparent">#00000000</color>
+</resources>

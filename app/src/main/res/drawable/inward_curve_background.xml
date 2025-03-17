@@ -1,0 +1,21 @@
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="100dp"
+    android:height="50dp"
+    android:viewportWidth="300"
+    android:viewportHeight="104">
+
+    <!-- Card background with rounded corners -->
+    <path
+        android:fillColor="#FFFFFF"
+        android:pathData="M16,0 h268 a16,16 0 0 1 16,16 v68 a16,16 0 0 1 -16,16 h-268 a16,16 0 0 1 -16,-16 v-68 a16,16 0 0 1 16,-16 z" />
+
+    <!-- Left half-circle cutout -->
+    <path
+        android:fillColor="#F3F5F6"
+        android:pathData="M0,40 a10,10 0 0 1 10,10 a10,10 0 0 1 -10,10 z" />
+
+    <!-- Right inward-facing half-circle cutout -->
+    <path
+        android:fillColor="#F3F5F6"
+        android:pathData="M300,40 a10,10 0 0 0 -10,10 a10,10 0 0 0 10,10 z" />
+</vector>
