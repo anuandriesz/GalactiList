@@ -9,10 +9,10 @@ import kotlinx.coroutines.withContext
 
 class PlanetRepository(private val planetAPI: PlanetAPI) : PlanetInterface {
     private val ioDispatcher: CoroutineDispatcher = Dispatchers.IO
-    override suspend fun getPlanetList(): Resource<PlanetsResponse?> {
+    override suspend fun getPlanetList(page: Int): Resource<PlanetsResponse?> {
         return withContext(ioDispatcher) {
             try {
-                val response = planetAPI.getPlanets()
+                val response = planetAPI.getPlanets(page)
                 if (response.isSuccessful) {
                     Resource.Success(response.body())
                 } else {

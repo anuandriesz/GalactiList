@@ -1,3 +1,5 @@
+package com.example.galactilist.ui.adapters
+
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
@@ -8,8 +10,9 @@ import com.example.galactilist.constants.Constants.Companion.IMAGE_URL_LOGO
 import com.example.galactilist.databinding.ListItemPlanetBinding
 import com.example.galactilist.network.responses.Planet
 
-class PlanetListAdapter(private val onPlanetClick: (Planet) -> Unit) : ListAdapter<Planet, PlanetListAdapter.PlanetViewHolder>(PlanetDiffCallback()) {
-
+class PlanetListAdapter(private val onPlanetClick: (Planet) -> Unit) : ListAdapter<Planet, PlanetListAdapter.PlanetViewHolder>(
+    PlanetDiffCallback()
+) {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PlanetViewHolder {
         val inflater = LayoutInflater.from(parent.context)
         val binding = ListItemPlanetBinding.inflate(inflater, parent, false)

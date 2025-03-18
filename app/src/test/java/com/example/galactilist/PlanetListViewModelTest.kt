@@ -3,6 +3,7 @@ package com.example.galactilist
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import androidx.lifecycle.Observer
 import com.example.galactilist.data.PlanetRepository
+import com.example.galactilist.network.responses.Planet
 import com.example.galactilist.network.responses.PlanetsResponse
 import com.example.galactilist.ui.planetList.PlanetListViewModel
 import com.example.galactilist.utils.Resource
@@ -38,7 +39,7 @@ class PlanetListViewModelTest {
     private lateinit var planetRepository: PlanetRepository
 
     @Mock
-    private lateinit var observer: Observer<Resource<PlanetsResponse?>>
+    private lateinit var observer: Observer<Resource<List<Planet>>> // ✅ FIXED observer type
 
     private lateinit var viewModel: PlanetListViewModel
     private val testDispatcher = StandardTestDispatcher()
@@ -57,10 +58,43 @@ class PlanetListViewModelTest {
     @Test
     fun `perform get planet list success`() = runTest {
         // Arrange
-        val response = PlanetsResponse(1, null, null, emptyList())
-
-        // Ensure repository returns a single Resource<PlanetsResponse?>
-        `when`(planetRepository.getPlanetList()).thenReturn(Resource.Success(response))
+        val planetList = listOf(
+            Planet(
+                name = "Tatooine",
+                rotationPeriod = "23",
+                orbitalPeriod = "304",
+                diameter = "10465",
+                climate = "arid",
+                gravity = "1 standard",
+                terrain = "desert",
+                surfaceWater = "1",
+                population = "200000",
+                residents = listOf(
+                    "https://swapi.dev/api/people/1/",
+                    "https://swapi.dev/api/people/2/",
+                    "https://swapi.dev/api/people/4/",
+                    "https://swapi.dev/api/people/6/",
+                    "https://swapi.dev/api/people/7/",
+                    "https://swapi.dev/api/people/8/",
+                    "https://swapi.dev/api/people/9/",
+                    "https://swapi.dev/api/people/11/",
+                    "https://swapi.dev/api/people/43/",
+                    "https://swapi.dev/api/people/62/"
+                ),
+                films = listOf(
+                    "https://swapi.dev/api/films/1/",
+                    "https://swapi.dev/api/films/3/",
+                    "https://swapi.dev/api/films/4/",
+                    "https://swapi.dev/api/films/5/",
+                    "https://swapi.dev/api/films/6/"
+                ),
+                created = "2014-12-09T13:50:49.641000Z",
+                edited = "2014-12-20T20:58:18.411000Z",
+                url = "https://swapi.dev/api/planets/1/"
+            )
+        )
+        val response = PlanetsResponse(1, null, null, planetList)
+        `when`(planetRepository.getPlanetList(1)).thenReturn(Resource.Success(response))
 
         // Observe LiveData
         viewModel.planetList.observeForever(observer)
@@ -70,7 +104,8 @@ class PlanetListViewModelTest {
         advanceUntilIdle() // Ensure coroutines complete
 
         // Assert
-        verify(observer).onChanged(Resource.Success(response))
+        verify(observer).onChanged(Resource.Loading) // First emits Loading
+        verify(observer).onChanged(Resource.Success(planetList)) // Then emits Success
         assertTrue(viewModel.planetList.value is Resource.Success)
 
         // Cleanup
@@ -81,10 +116,9 @@ class PlanetListViewModelTest {
     fun `perform get planet list error`() = runTest {
         // Arrange
         val errorMessage = "Error"
-        val error = Exception(errorMessage) // Ensure Exception has a message
+        val error = Exception(errorMessage)
 
-        // Mock repository to return an Error state
-        `when`(planetRepository.getPlanetList()).thenReturn(Resource.Error(error))
+        `when`(planetRepository.getPlanetList(1)).thenReturn(Resource.Error(error))
 
         // Observe LiveData
         viewModel.planetList.observeForever(observer)
@@ -94,12 +128,10 @@ class PlanetListViewModelTest {
         advanceUntilIdle() // Ensure coroutines complete
 
         // Assert
-        val argumentCaptor = argumentCaptor<Resource<PlanetsResponse?>>()
+        val argumentCaptor = argumentCaptor<Resource<List<Planet>>>()
 
-        // Verify LiveData emitted Loading first
         verify(observer).onChanged(Resource.Loading)
 
-        // Capture the emitted Error state
         verify(observer, times(2)).onChanged(argumentCaptor.capture())
 
         val capturedValues = argumentCaptor.allValues

@@ -4,5 +4,5 @@ import com.example.galactilist.network.responses.PlanetsResponse
 import com.example.galactilist.utils.Resource
 
 interface PlanetInterface {
-    suspend fun getPlanetList(): Resource<PlanetsResponse?>
+    suspend fun getPlanetList(page: Int): Resource<PlanetsResponse?>
 }
