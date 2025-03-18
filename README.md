@@ -52,3 +52,6 @@ This validate ViewModel business logic in isolation.
 
 # Screen recording
 📹 [Watch the demo video](https://drive.google.com/file/d/1dvZL1n3cmN-m6mVlUfNV-k5kAl7qGTCB/view?usp=sharing)
+
+Special Note: Due to time constraints and my current non-familiarity with Jetpack Compose, 
+I have implemented the UI using XML to ensure timely delivery while maintaining the required functionality.
