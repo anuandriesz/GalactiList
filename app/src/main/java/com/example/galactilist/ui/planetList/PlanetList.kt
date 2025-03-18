@@ -13,6 +13,7 @@ import com.example.galactilist.constants.Constants.Companion.PLANET_DETAILS
 import com.example.galactilist.databinding.FragmentPlanetListBinding
 import com.example.galactilist.ui.MainActivity
 import com.example.galactilist.ui.planetDetailView.PlanetDetailViewFragment
+import com.example.galactilist.utils.Dialog.showAlertDialog
 import com.example.galactilist.utils.Resource
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -32,26 +33,30 @@ class PlanetList : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        initViews()
+        setupToolbar()
+        setupRecyclerView()
+        initAPI()
     }
 
     private fun initAPI() {
         viewModel.performGetPlanets().observe(viewLifecycleOwner) { resource ->
+            binding.loading.visibility = if (resource is Resource.Loading) View.VISIBLE else View.GONE
             when (resource) {
                 is Resource.Loading -> {
-                   binding.loading.visibility = View.VISIBLE
                 }
 
                 is Resource.Success -> {
-                    binding.loading.visibility = View.GONE
                     resource.data.let { planets ->
                         planetListAdapter?.submitList(planets.results)
                     }
                 }
 
                 is Resource.Error -> {
-                    binding.loading.visibility = View.GONE
-                    //showError(resource.error)
+                    context?.showAlertDialog(
+                        title = getString(R.string.error_occurred),
+                        message = getString(R.string.please_restart_the_search),
+                        ok = Pair(getString(R.string.ok)) {}
+                    )
                 }
 
                 else -> {
@@ -68,27 +73,18 @@ class PlanetList : Fragment() {
     }
 
     private fun setupToolbar() {
-        val mainActivity = activity as? MainActivity
-        mainActivity?.binding?.toolbarLayout?.apply {
-            toolbarTitle.text = "Welcome to Galactilist!"
+        (activity as? MainActivity)?.binding?.toolbarLayout?.apply {
+            toolbarTitle.text = getString(R.string.welcome)
             toolbarBackButton.visibility = View.GONE
         }
     }
 
     private fun setupRecyclerView() {
         planetListAdapter = PlanetListAdapter { selectedPlanet ->
-          //call another fragment
-            val bundle =
-                Bundle().apply {
-                    putParcelable(PLANET_DETAILS, selectedPlanet)
-                }
-            parentFragmentManager
-                .beginTransaction()
-                .replace(
-                    R.id.fragmentContainerView,
-                    PlanetDetailViewFragment::class.java,
-                    bundle
-                ).addToBackStack(TAG)
+            val bundle = Bundle().apply { putParcelable(PLANET_DETAILS, selectedPlanet) }
+            parentFragmentManager.beginTransaction()
+                .replace(R.id.fragmentContainerView, PlanetDetailViewFragment::class.java, bundle)
+                .addToBackStack(TAG)
                 .commit()
         }
         binding.rvPlanets.apply {

@@ -4,4 +4,9 @@
     <string name="orbital_period">Orbital Period</string>
     <string name="gravity">Gravity</string>
     <string name="banner_image_description">Banner image of the planet</string>
+    <string name="error_occurred">Error occurred</string>
+    <string name="please_restart_the_search">Please restart the search</string>
+    <string name="ok">OK</string>
+    <string name="welcome">Welcome to Galactilist!</string>
+    <string name="planet_details">Planet Details</string>
 </resources>
